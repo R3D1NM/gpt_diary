@@ -39,9 +39,6 @@ export const CallGPT = async ({prompt}) => {
 
     ]
 
-
-    console.log(">> CallGPT");
-    console.log(messages);
     const res = await openai.chat.completions.create({
         messages,
         model: "gpt-3.5-turbo",
@@ -50,7 +47,6 @@ export const CallGPT = async ({prompt}) => {
     });
 
     const message = res.choices[0].message.content
-    console.log(message);
 
     return message
 }

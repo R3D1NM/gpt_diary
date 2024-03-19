@@ -3,6 +3,7 @@ import { CallGPT } from "./api/gpt"
 import InputForm from "./components/InputForm"
 import styled from "styled-components"
 import DiaryCard from "./components/DiaryCard"
+import { message } from "antd"
 
 const dummy = JSON.parse(`{
   "title": "새로운 배움의 시작",
@@ -17,6 +18,7 @@ const dummy = JSON.parse(`{
 function App() {
   const [data, setData] = useState(dummy)
   const [isLoading, setIsLoading] = useState(false)
+  const [messageApi, contextHolder] = message.useMessage();
 
   const handleAPICall= async (userInput) =>{
     try {
@@ -24,24 +26,27 @@ function App() {
       const message = await CallGPT({prompt:`${userInput}`})
       setData(JSON.parse(message))
     } catch (error) {
-      console.log(error);
+      messageApi.open({
+        type:"error",
+        content: error?.message
+      })
     } finally{
       setIsLoading(false)
     }
   }
 
   const handleSubmit = (userInput) => {
-    console.log(">>userInput",userInput);
     handleAPICall(userInput)
   }
 
   return (
     <AppContainer>
+      {contextHolder}
       <AppTitle>
         ChatGPT Diary
       </AppTitle>
       <div>
-        <InputForm isLoading={isLoading} handleSubmit={handleSubmit}/>  
+        <InputForm messageApi={messageApi} isLoading={isLoading} handleSubmit={handleSubmit}/>  
       </div>
       <DiaryCard data={data} isLoading={isLoading}/>
     </AppContainer>

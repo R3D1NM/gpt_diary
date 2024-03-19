@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { ActionListItem, CardContainer, CardContent, CardTitle, DiaryContainer, Divider, ResultTitle } from "./CommonStyles"
-import { CheckCircleTwoTone, HeartTwoTone, LoadingOutlined, MessageTwoTone, SmileTwoTone, SoundTwoTone } from "@ant-design/icons"
+import { CheckCircleTwoTone, HeartTwoTone, MessageTwoTone, SmileTwoTone, SoundTwoTone } from "@ant-design/icons"
 import { Image } from "antd"
 import styled from "styled-components"
 
@@ -11,12 +11,11 @@ const ThumbnailImage = styled(Image)`
 `
 
 const DiaryCard = ({data,isLoading}) => {
-  return (
+    return (
     <DiaryContainer>
         {isLoading&&(
             <>
             loading...
-            <LoadingOutlined/>
             </>
         )}
         <ResultTitle>{data.title}</ResultTitle>
@@ -73,7 +72,7 @@ const DiaryCard = ({data,isLoading}) => {
             </CardContent>
         </CardContainer>
     </DiaryContainer>
-  )
+    )
 }
 
 export default DiaryCard
