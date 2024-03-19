@@ -23,13 +23,13 @@ export const CallGPT = async ({prompt}) => {
         
         Translate into Korean and Use the output in the following JSON format:
         { 
-            title: here is [title],
-            thumbnail: here is [image],
-            summary: here is [summarize]
-            emotional_content: here is [emotional diary],
-            emotional_result: here is [evaluates],
-            analysis: here is [Psychological analysis],
-            action_list: here is [3 action tips],
+            "title": here is [title],
+            "thumbnail": here is [image],
+            "summary": here is [summarize]
+            "emotional_content": here is [emotional diary],
+            "emotional_result": here is [evaluates],
+            "analysis": here is [Psychological analysis],
+            "action_list": here is [3 action tips],
         }
         [events]: 
         """
@@ -48,9 +48,9 @@ export const CallGPT = async ({prompt}) => {
         max_tokens:1_000,
         temperature:0.7
     });
-    console.log(res);
 
     const message = res.choices[0].message.content
+    console.log(message);
 
     return message
 }
