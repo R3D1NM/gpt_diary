@@ -1,6 +1,8 @@
 import { useState } from "react"
 import { CallGPT } from "./api/gpt"
 import InputForm from "./components/InputForm"
+import styled from "styled-components"
+import DiaryCard from "./components/DiaryCard"
 
 const dummy = JSON.parse(`{
   "title": "새로운 배움의 시작",
@@ -34,15 +36,32 @@ function App() {
   }
 
   return (
-    <>
+    <AppContainer>
+      <AppTitle>
+        ChatGPT Diary
+      </AppTitle>
       <div>
         <InputForm isLoading={isLoading} handleSubmit={handleSubmit}/>  
       </div>
-      <div>
-        {JSON.stringify(data)}
-      </div>
-    </>
+      <DiaryCard data={data} isLoading={isLoading}/>
+    </AppContainer>
   )
 }
 
-export default App
+export default App;
+
+const AppContainer = styled.div`
+  padding:20px;
+  display:flex;
+  flex-direction: column;
+  max-width:720px;
+  width: 100%;
+  margin: 0 auto;
+`;
+
+const AppTitle = styled.div`
+  width: 100%;
+  font-weight: 400;
+  font-size: 35px;
+  text-align: center;
+`;
